@@ -52,6 +52,12 @@ router.post("/", async (request, response) => {
 
     // Adiciona o novo usuário no array (lista de usuários)
     users.push(newUser);
+
+    // Salva o arquivo
+    fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
+
+    // Remove a senha
     
+
   } catch (error) { }
 });
