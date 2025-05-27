@@ -2,10 +2,13 @@ import express from 'express';
 import fs from "fs";
 import path from "path";
 import bcrypt from "bcrypt";
-import uid from "uuid";
+import { v4 as uuidv4 } from "uuidv4";
+import { fileURLToPath } from 'url';
 
 const router = express.Router();
-const usersFile = path.join(__dirname, "../data/user.json");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const usersFile = path.join(__dirname, "../data/users.json");
 
 // Garante que o arquivo existe
 if (!fs.existsSync(usersFile)) {
@@ -42,7 +45,7 @@ router.post("/", async (request, response) => {
 
     // Cria um novo usuário
     const newUser = {
-      id: uid(),
+      id: uuidv4,
       name: name,
       email: email,
       password: hashedPassword,
@@ -56,8 +59,20 @@ router.post("/", async (request, response) => {
     // Salva o arquivo
     fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
 
-    // Remove a senha
-    
+    // Remove a senha do retorno (Não mostra a senha na tela)
+    const { senha: _, ...userWithoutPassword } = newUser;
 
-  } catch (error) { }
+    response.status(201).json({
+      mensagem: "Usuário cadastrado com sucesso!",
+      user: userWithoutPassword
+    });
+
+  } catch (error) { 
+    console.error("Erro ao criar usuário:", erro);
+    response.status(500).json({
+      erro: "Erro ao criar usuário."
+    })
+  }
 });
+
+export default router;
