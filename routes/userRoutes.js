@@ -2,7 +2,7 @@ import express from 'express';
 import fs from "fs";
 import path from "path";
 import bcrypt from "bcrypt";
-import { v4 as uuidv4 } from "uuidv4";
+import { v4 as uuidv4 } from "uuid";
 import { fileURLToPath } from 'url';
 
 const router = express.Router();
@@ -29,7 +29,7 @@ router.post("/", async (request, response) => {
   try {
     // Busca os usuários existentes
     const data = fs.readFileSync(usersFile, "utf-8");
-    const users = JSON.parse(data);
+    const users = JSON.parse(data || "[]");
 
     // Verifica se o E-mail já existe
     const isEmail = users.find((user) => user.email === email);
@@ -68,7 +68,7 @@ router.post("/", async (request, response) => {
     });
 
   } catch (error) { 
-    console.error("Erro ao criar usuário:", erro);
+    console.error("Erro ao criar usuário:", error);
     response.status(500).json({
       erro: "Erro ao criar usuário."
     })

@@ -1,0 +1,9 @@
+[
+  {
+    "name": "John",
+    "email": "John@blabla.com.br",
+    "password": "$2b$10$xp4MVyHdGeO6GjtuxHnumeAJ7qjQIybQ/MFHlcWiko1P2x1Q23yja",
+    "createdAt": "27/05/2025",
+    "updatedAt": "27/05/2025"
+  }
+]
