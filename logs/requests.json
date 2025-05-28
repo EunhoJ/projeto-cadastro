@@ -1,0 +1,42 @@
+[
+  {
+    "date": "28/05/2025",
+    "method": "POST",
+    "url": "/api/users/",
+    "body": {
+      "name": "John",
+      "email": "john@gmail.com",
+      "password": "12345"
+    }
+  },
+  {
+    "date": "28/05/2025",
+    "method": "POST",
+    "url": "/api/users/",
+    "body": {
+      "name": "John",
+      "email": "john@gmail.com",
+      "password": "12345"
+    }
+  },
+  {
+    "date": "28/05/2025",
+    "method": "POST",
+    "url": "/api/users/",
+    "body": {
+      "name": "John",
+      "email": "john@gmail.com",
+      "password": "12345"
+    }
+  },
+  {
+    "date": "28/05/2025",
+    "method": "POST",
+    "url": "/api/users/",
+    "body": {
+      "name": "John",
+      "email": "john@gmail.com",
+      "password": "12345"
+    }
+  }
+]

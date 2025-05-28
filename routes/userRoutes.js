@@ -8,17 +8,27 @@ import { fileURLToPath } from 'url';
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const dataDir = path.join(__dirname, "../data");
 const usersFile = path.join(__dirname, "../data/users.json");
 
 // Garante que o arquivo existe
-if (!fs.existsSync(usersFile)) {
-  fs.writeFileSync(usersFile, "[]");
+function ensureUserFile() {
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir);
+  }
+
+  if (!fs.existsSync(usersFile)) {
+    fs.writeFileSync(usersFile, "[]");
+  }
 }
 
 router.post("/", async (request, response) => {
   // Desestruturação dos dados enviados na requisição (request / post)
   const { name, email, password } = request.body;
 
+  ensureUserFile();
+  
   // Verifica os campos em branco
   if (!name || !email || !password) {
     return response.status(400).json({
@@ -43,9 +53,12 @@ router.post("/", async (request, response) => {
     // Gera o Hash da senha
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Cria o ID único
+    const id = uuidv4();
+
     // Cria um novo usuário
     const newUser = {
-      id: uuidv4,
+      uid: id,
       name: name,
       email: email,
       password: hashedPassword,
@@ -67,7 +80,7 @@ router.post("/", async (request, response) => {
       user: userWithoutPassword
     });
 
-  } catch (error) { 
+  } catch (error) {
     console.error("Erro ao criar usuário:", error);
     response.status(500).json({
       erro: "Erro ao criar usuário."

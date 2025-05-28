@@ -1,9 +1,10 @@
 [
   {
+    "uid": "a28ba733-d5d0-47ce-b980-cc80fe1296f0",
     "name": "John",
-    "email": "John@blabla.com.br",
-    "password": "$2b$10$xp4MVyHdGeO6GjtuxHnumeAJ7qjQIybQ/MFHlcWiko1P2x1Q23yja",
-    "createdAt": "27/05/2025",
-    "updatedAt": "27/05/2025"
+    "email": "john@gmail.com",
+    "password": "$2b$10$d44ViKWHMQfb.iN/XIb4AeHkvItdA6NN4P8O9T2lrysUWmeeL63v6",
+    "createdAt": "28/05/2025",
+    "updatedAt": "28/05/2025"
   }
 ]
